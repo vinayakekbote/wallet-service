@@ -23,4 +23,42 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(commonResponse);
     }
 
+    @ExceptionHandler(WalletNotFoundException.class)
+    public ResponseEntity<CommonResponse<String>> handWalletNotFoundException(WalletNotFoundException exception){
+        CommonResponse<String> commonResponse = new CommonResponse<>();
+
+        commonResponse.setMessage(exception.getMessage());
+        commonResponse.setResponseStatus(HttpStatus.CONFLICT.value());
+        commonResponse.setData("Wallet Not Available");
+        commonResponse.setLocalDateTime(LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.CONFLICT.value()).body(commonResponse);
+    }
+
+    @ExceptionHandler(InvalidAmountException.class)
+    public ResponseEntity<CommonResponse<String>> handleInvalidAmount(
+            InvalidAmountException ex) {
+
+        return ResponseEntity.badRequest()
+                .body(CommonResponse.<String>builder()
+                        .success(false)
+                        .message(ex.getMessage())
+                        .responseStatus(HttpStatus.BAD_REQUEST.value())
+                        .localDateTime(LocalDateTime.now())
+                        .build());
+    }
+
+    @ExceptionHandler(WalletInactiveException.class)
+    public ResponseEntity<CommonResponse<String>> handleInactiveWallet(
+            WalletInactiveException ex) {
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(CommonResponse.<String>builder()
+                        .success(false)
+                        .message(ex.getMessage())
+                        .responseStatus(HttpStatus.FORBIDDEN.value())
+                        .localDateTime(LocalDateTime.now())
+                        .build());
+    }
+
 }
