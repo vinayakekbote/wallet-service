@@ -2,6 +2,7 @@ package com.digitalwallet.wallet.controller;
 
 import com.digitalwallet.wallet.dto.requestDto.CreditRequestDto;
 import com.digitalwallet.wallet.dto.requestDto.WalletCreateRequestDto;
+import com.digitalwallet.wallet.dto.requestDto.WalletDto;
 import com.digitalwallet.wallet.dto.requestDto.WithdrawRequestDto;
 import com.digitalwallet.wallet.service.WalletService;
 import com.digitalwallet.wallet.util.CommonResponse;
@@ -32,14 +33,14 @@ public class WalletController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<CommonResponse<String>> depositMoney(@Valid @RequestBody CreditRequestDto requestDto){
-        CommonResponse<String> response = walletService.depositMoney(requestDto);
+    public ResponseEntity<CommonResponse<WalletDto>> depositMoney(@Valid @RequestBody CreditRequestDto requestDto){
+        CommonResponse<WalletDto> response = walletService.depositMoney(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PostMapping("/withdraw")
-    public ResponseEntity<CommonResponse<String>> withdrawMoney(@Valid @RequestBody WithdrawRequestDto requestDto){
-        CommonResponse<String> response = walletService.withdrawMoney(requestDto);
+    public ResponseEntity<CommonResponse<WalletDto>> withdrawMoney(@Valid @RequestBody WithdrawRequestDto requestDto){
+        CommonResponse<WalletDto> response = walletService.withdrawMoney(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
