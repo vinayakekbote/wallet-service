@@ -35,6 +35,7 @@ public class WalletController {
     @PostMapping("/deposit")
     public ResponseEntity<CommonResponse<WalletDto>> depositMoney(@Valid @RequestBody CreditRequestDto requestDto){
         CommonResponse<WalletDto> response = walletService.depositMoney(requestDto);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
