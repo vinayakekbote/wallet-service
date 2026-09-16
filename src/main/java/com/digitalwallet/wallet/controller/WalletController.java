@@ -4,16 +4,16 @@ import com.digitalwallet.wallet.dto.requestDto.CreditRequestDto;
 import com.digitalwallet.wallet.dto.requestDto.WalletCreateRequestDto;
 import com.digitalwallet.wallet.dto.requestDto.WalletDto;
 import com.digitalwallet.wallet.dto.requestDto.WithdrawRequestDto;
+import com.digitalwallet.wallet.entity.Wallet;
 import com.digitalwallet.wallet.service.WalletService;
 import com.digitalwallet.wallet.util.CommonResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/wallet")
@@ -43,6 +43,11 @@ public class WalletController {
     public ResponseEntity<CommonResponse<WalletDto>> withdrawMoney(@Valid @RequestBody WithdrawRequestDto requestDto){
         CommonResponse<WalletDto> response = walletService.withdrawMoney(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping("/getWallet")
+    public CommonResponse<List<Wallet>> getWallet(){
+        return walletService.getWallet();
     }
 
 }
