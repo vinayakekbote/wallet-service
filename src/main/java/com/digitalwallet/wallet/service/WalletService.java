@@ -4,7 +4,10 @@ import com.digitalwallet.wallet.dto.requestDto.CreditRequestDto;
 import com.digitalwallet.wallet.dto.requestDto.WalletCreateRequestDto;
 import com.digitalwallet.wallet.dto.requestDto.WalletDto;
 import com.digitalwallet.wallet.dto.requestDto.WithdrawRequestDto;
+import com.digitalwallet.wallet.entity.Wallet;
 import com.digitalwallet.wallet.util.CommonResponse;
+
+import java.util.List;
 
 public interface WalletService {
 
@@ -14,4 +17,6 @@ public interface WalletService {
     CommonResponse<WalletDto> depositMoney(CreditRequestDto requestDto);
 
     CommonResponse<WalletDto> withdrawMoney(WithdrawRequestDto requestDto);
+
+    CommonResponse<List<Wallet>> getWallet();
 }

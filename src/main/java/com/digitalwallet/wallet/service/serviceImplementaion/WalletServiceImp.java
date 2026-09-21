@@ -19,10 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -138,6 +140,15 @@ public class WalletServiceImp implements WalletService {
                 .responseStatus(HttpStatus.OK.value())
                 .localDateTime(LocalDateTime.now())
                 .build();
+    }
+
+    @Override
+    public CommonResponse<List<Wallet>> getWallet() {
+        List<Wallet> res = repository.findAll();
+        CommonResponse<List<Wallet>> response = new CommonResponse<>();
+        response.setSuccess(true);
+        response.setData(res);
+        return response;
     }
 
 }
